@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		2976F26017C5AB9700AA50B2 /* Aggregate */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 2976F26317C5AB9700AA50B2 /* Build configuration list for PBXAggregateTarget "Aggregate" */;
+			buildPhases = (
+				2976F26417C5AB9C00AA50B2 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Aggregate;
+			productName = Aggregate;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		291402A417C4605200DC4155 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291402A317C4605200DC4155 /* Foundation.framework */; };
 		291402A617C4605200DC4155 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291402A517C4605200DC4155 /* UIKit.framework */; };
@@ -363,6 +377,7 @@
 				2914029C17C4605200DC4155 /* Frameworks */,
 				2914029D17C4605200DC4155 /* Headers */,
 				2914029E17C4605200DC4155 /* Resources */,
+				2976F26517C5ABA100AA50B2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -395,6 +410,7 @@
 			projectRoot = "";
 			targets = (
 				2914029F17C4605200DC4155 /* ASIHTTPRequest */,
+				2976F26017C5AB9700AA50B2 /* Aggregate */,
 			);
 		};
 /* End PBXProject section */
@@ -410,6 +426,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2976F26417C5AB9C00AA50B2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FRAMEWORK_NAME=${PROJECT_NAME}\nFRAMEWORK_DIR=${BUILD_DIR}/${FRAMEWORK_NAME}.framework\nFRAMEWORK_LIB=${FRAMEWORK_DIR}/${FRAMEWORK_NAME}\nFRAMEWORK_LIB_DEVICE=${FRAMEWORK_LIB}-iphoneos\nFRAMEWORK_LIB_SIMULATOR=${FRAMEWORK_LIB}-iphonesimulator\n\nlipo -create \"${FRAMEWORK_LIB_DEVICE}\" \"${FRAMEWORK_LIB_SIMULATOR}\" -output \"${FRAMEWORK_LIB}\"\n\nrm \"${FRAMEWORK_LIB_DEVICE}\"\nrm \"${FRAMEWORK_LIB_SIMULATOR}\"";
+		};
+		2976F26517C5ABA100AA50B2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FRAMEWORK_DIR=${BUILD_DIR}/${PRODUCT_NAME}.framework\nBUILD_FRAMEWORK_DIR=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\nif [ !-d \"${FRAMEWORK_DIR}\" ]\nthen\nmkdir -p \"${FRAMEWORK_DIR}\"\nfi\n\nFRAMEWORK_HEADERS_DIR=${FRAMEWORK_DIR}/Headers\nBUILD_FRAMEWORK_HEADERS_DIR=${BUILD_FRAMEWORK_DIR}/Headers\nif [ -d \"${FRAMEWORK_HEADERS_DIR}\" ]\nthen\nrm -rf \"${FRAMEWORK_HEADERS_DIR}\"\nfi\nmkdir -p \"${FRAMEWORK_HEADERS_DIR}\"\ncp -R \"${BUILD_FRAMEWORK_HEADERS_DIR}\" \"${FRAMEWORK_DIR}\"\n\nFRAMEWORK_RESOURCES_DIR=${FRAMEWORK_DIR}/Resources\nBUILD_FRAMEWORK_RESOURCES_DIR=${BUILD_FRAMEWORK_DIR}/Resources\nif [ -d \"${FRAMEWORK_RESOURCES_DIR}\" ]\nthen\nrm -rf \"${FRAMEWORK_RESOURCES_DIR}\"\nfi\nmkdir -p \"${FRAMEWORK_RESOURCES_DIR}\"\ncp -R \"${BUILD_FRAMEWORK_RESOURCES_DIR}\" \"${FRAMEWORK_DIR}\"\n\nFRAMEWORK_LIB=${FRAMEWORK_DIR}/${PRODUCT_NAME}${EFFECTIVE_PLATFORM_NAME}\nBUILD_FRAMEWORK_LIB=${BUILD_FRAMEWORK_DIR}/${PRODUCT_NAME}\nif [ -f \"${FRAMEWORK_LIB}\" ]\nthen\nrm \"${FRAMEWORK_LIB}\"\nfi\ncp \"${BUILD_FRAMEWORK_LIB}\" \"${FRAMEWORK_LIB}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2914029B17C4605200DC4155 /* Sources */ = {
@@ -570,6 +615,20 @@
 			};
 			name = Release;
 		};
+		2976F26117C5AB9700AA50B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2976F26217C5AB9700AA50B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -590,6 +649,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		2976F26317C5AB9700AA50B2 /* Build configuration list for PBXAggregateTarget "Aggregate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2976F26117C5AB9700AA50B2 /* Debug */,
+				2976F26217C5AB9700AA50B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
